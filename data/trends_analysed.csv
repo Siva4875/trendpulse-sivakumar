@@ -1,0 +1,72 @@
+post_id,title,category,score,num_comments,author,collected_at,engagement,is_popular
+49710015,How much of F-Droid is LLM generated?,technology,35,6,_ZeD_,2026-09-15 16:21:04.890170,0.16666666666666666,False
+49710109,Let's make quality the norm again,technology,57,42,ingve,2026-09-15 16:21:05.907246,0.7241379310344828,False
+49710253,Suspected sabotage causes major Netherlands rail disruption,technology,17,0,choult,2026-09-15 16:21:07.832035,0.0,False
+49697477,Dropping eBPF CPU Cost by About 90% with Memoization (Not AI Gen),technology,121,27,nathannaveen,2026-09-15 16:21:18.056705,0.22131147540983606,False
+49695876,OpenAI bots knew about the RubyGems caching vulnerability,technology,469,376,gregnavis,2026-09-15 16:21:18.960213,0.8,True
+49700255,Cloudflare AKE cuts origin HelloRetryRequests from 52% to 3.7%,technology,113,34,iamsyr,2026-09-15 16:21:37.409015,0.2982456140350877,False
+49706223,"Ex-FTC boss Khan: break out the handcuffs for AI CEOs, citing 1934 precedent",technology,173,108,throwworhtthrow,2026-09-15 16:21:40.843779,0.6206896551724138,True
+49697094,Adversarial Fashion Makes a Statement on AI Panopticon,technology,102,46,rbanffy,2026-09-15 16:21:49.361174,0.44660194174757284,False
+49703003,GPT-5.6 Luna vs. GPT-6 Astra: Is a $1.20 Model Good Enough for Code Review?,technology,147,135,theanonymousone,2026-09-15 16:21:50.189553,0.9121621621621622,True
+49690554,The case against JPEG XL,technology,270,363,contact9879,2026-09-15 16:21:53.591473,1.3394833948339484,True
+49696132,"Largest known Roman mosaic, beneath Baths of Trajan, opens to the public",technology,53,8,bookofjoe,2026-09-15 16:21:59.600679,0.14814814814814814,False
+49693690,"When code is a maze, smart developers make maps (2025)",technology,35,44,boxesnlines,2026-09-15 16:22:02.167536,1.2222222222222223,False
+49696125,How to write an effective software design document,technology,333,136,fagnerbrack,2026-09-15 16:22:04.710429,0.40718562874251496,True
+49706941,I worked at Google DeepMind. You should listen to the warnings about AI,technology,36,23,gibspaulding,2026-09-15 16:22:08.151992,0.6216216216216216,False
+49693384,OpenArch – PyTorch implementations of modern LLM architectures,technology,138,31,anuj0456,2026-09-15 16:22:09.021996,0.22302158273381295,False
+49662246,"Rope, twine and thread: Invisible technologies of the Stone Age",technology,118,51,knowablemag,2026-09-15 16:22:09.853288,0.42857142857142855,False
+49683953,Data collected by cars and sold to third parties,technology,473,254,bookofjoe,2026-09-15 16:22:14.277634,0.5358649789029536,True
+49696995,We do modern frequentist statistics: Using fake-data simulation,technology,20,1,Tomte,2026-09-15 16:22:19.573199,0.047619047619047616,False
+49706829,"Israeli Effective Altruism Firm Behind OpenAI, Anthropic, and Meta Cyberattacks",technology,49,9,MrBuddyCasino,2026-09-15 16:22:21.460965,0.18,False
+49690260,Open-source AI and open models reading list,technology,154,29,simonpure,2026-09-15 16:22:22.413126,0.1870967741935484,True
+49678969,"Why are AI agents lying, cheating and coordinating?",technology,649,687,jonifico,2026-09-15 16:22:23.354126,1.0569230769230769,True
+49695409,"Apple's Siri AI Can Be Swapped Out for Claude, ChatGPT, Code Shows",technology,222,157,tosh,2026-09-15 16:22:24.210174,0.7040358744394619,True
+49699075,Show HN: Fly.exe – An EON systems like virtual fruit fly uploaded to computer,technology,23,4,Ibti_sam,2026-09-15 16:22:30.843511,0.16666666666666666,False
+49707006,Air Force secretary acknowledges the US has weapons in space,technology,18,3,SanjayMehta,2026-09-15 16:22:32.503610,0.15789473684210525,False
+49694596,Big AI sets out its terms for regulatory capture,technology,117,68,joebuckwilliams,2026-09-15 16:22:34.218658,0.576271186440678,False
+49638071,Reverse engineering my e-scooter and rewriting the firmware in Rust,worldnews,441,104,vinhnx,2026-09-15 16:23:58.688338,0.23529411764705882,True
+49704001,US coal 'biggest contributor by far' to rise in global emissions,worldnews,40,15,softwaredoug,2026-09-15 16:24:38.610473,0.36585365853658536,False
+49690051,The Coming War on General Computation (2011),worldnews,119,39,gregsadetsky,2026-09-15 16:24:46.921720,0.325,False
+49686766,"I'm being cyberattacked by Tesla, Inc",worldnews,453,118,robinpie,2026-09-15 16:25:48.293255,0.2599118942731278,True
+49683729,US Customs supervisor busted for stealing hardware from Homeland Security PCs,worldnews,133,108,Levitating,2026-09-15 16:26:34.448394,0.8059701492537313,False
+49695490,EPA Expected to Erase Limits on Climate Pollution from Power Plants,worldnews,11,0,robtherobber,2026-09-15 16:27:01.405919,0.0,False
+49660576,Global Glacier Extinction Explorer,worldnews,158,64,guillego,2026-09-15 16:27:16.949605,0.4025157232704403,True
+49642396,SystemIO conflicts are not firmware bugs,worldnews,38,6,haeseong,2026-09-15 16:27:32.473285,0.15384615384615385,False
+49658299,Houthis 'take control' of key island in global shipping route,worldnews,392,705,consumer451,2026-09-15 16:28:14.985614,1.7938931297709924,True
+49686697,Global shortage has led to motor oil rationing at Costco,worldnews,223,213,mikhael,2026-09-15 16:28:18.425365,0.9508928571428571,True
+49691858,EPA Expected to Erase Limits on Climate Pollution from Power Plants,worldnews,7,0,foobarqux,2026-09-15 16:29:47.000251,0.0,False
+49700661,Steam Frame starts at $1059,sports,680,524,bsimpson,2026-09-15 16:30:32.485628,0.7694566813509545,True
+49700413,"US 10-Year Breaches 5% as Inflation, Supply Worries Mount",sports,64,42,toomuchtodo,2026-09-15 16:32:04.461970,0.6461538461538462,False
+49642531,"List of references on Sony websites to players ""owning"" their digital games",sports,452,160,haunter,2026-09-15 16:33:22.893007,0.35320088300220753,True
+49700366,"Steam Frame: Valve's standalone SteamOS VR headset ($1,059)",sports,23,14,sirlancer,2026-09-15 16:33:59.310165,0.5833333333333334,False
+49707473,US confirms for first time it has deployed space weapons,science,70,38,harporoeder,2026-09-15 16:37:50.204395,0.5352112676056338,False
+49699648,Why don't machine learning research agents overfit?,science,130,74,Betelbuddy,2026-09-15 16:38:05.367319,0.5648854961832062,False
+49638510,Spaceships (Reverse Asteroid),science,367,69,zdw,2026-09-15 16:38:11.149592,0.1875,True
+49706451,US military reveals it has weapons in space,science,50,14,JumpCrisscross,2026-09-15 16:38:40.501291,0.27450980392156865,False
+49653311,Reverse-Engineering Claude Web's MicroVM: Uncovering Anthropic's Hidden Antspace,science,109,24,rzk,2026-09-15 16:40:01.079006,0.21818181818181817,False
+49662214,λ Snap – An inviting programming language for kids and adults for CS study,science,184,108,dr_kiszonka,2026-09-15 16:41:27.912331,0.5837837837837838,True
+49679717,MacFileSizing – What is consuming my disk space?,science,8,2,jaccon,2026-09-15 16:43:51.189514,0.2222222222222222,False
+49676425,Show HN: Redis City – Explore how Redis works in an interactive 3D model,entertainment,104,18,poltora,2026-09-15 16:45:13.624645,0.17142857142857143,False
+49705442,Show HN: Macros with a Behringer FCB1010 MIDI Pedalboard in macOS,entertainment,77,19,fretlessjazz,2026-09-15 16:45:25.206452,0.24358974358974358,False
+49696402,Show HN: Pelican-bicycle alternatives,entertainment,121,44,tkgally,2026-09-15 16:45:41.848238,0.36065573770491804,False
+49699267,"Show HN: Nari Qwen3-TTS and Qwen3-ASR – High accuracy, low latency and cost",entertainment,82,29,toebee,2026-09-15 16:45:42.707960,0.3493975903614458,False
+49699159,Show HN: Neobrutalism.dev – Just added Base UI support and added new color theme,entertainment,154,72,samke-,2026-09-15 16:45:51.166166,0.4645161290322581,True
+49695408,Show HN: Kinesis – Control your Mac with the Meta Neural Band,entertainment,116,43,callbacked,2026-09-15 16:45:57.090004,0.36752136752136755,False
+49697912,Show HN: Pushie – Get notified with a simple webhook,entertainment,20,13,vasanthv,2026-09-15 16:46:22.110669,0.6190476190476191,False
+49689178,Show HN: What Just Pinged Me?,entertainment,24,0,furyofantares,2026-09-15 16:47:10.415644,0.0,False
+49693226,Show HN: 1080p is 920px tall – 1k real browser viewports,entertainment,41,20,zenpe,2026-09-15 16:47:24.710831,0.47619047619047616,False
+49649789,Show HN: Bodily Oddities,entertainment,340,214,vesterde,2026-09-15 16:47:41.920084,0.6275659824046921,True
+49700175,Show HN: MCP Harbor – An MCP Registry,entertainment,6,2,Lbesecker195,2026-09-15 16:47:45.311998,0.2857142857142857,False
+49695295,Show HN: Authorize MCP tool calls without giving agents the credentials,entertainment,7,7,b4timer,2026-09-15 16:47:50.494620,0.875,False
+49690614,Show HN: Exploring the intersection of prediction markets and social media,entertainment,14,2,ryanpere2298,2026-09-15 16:48:00.568085,0.13333333333333333,False
+49645654,"Show HN: EterDB, a Postgres fork that makes it easy to recover from incidents",entertainment,46,20,fdeth,2026-09-15 16:48:06.521610,0.425531914893617,False
+49701888,Disney's Films Used to Look Different,entertainment,11,0,speckx,2026-09-15 16:48:37.814338,0.0,False
+49693971,"Show HN: I made a flight simulator, except you're just a passenger",entertainment,14,7,rkotcher,2026-09-15 16:48:54.404965,0.4666666666666667,False
+49637385,Show HN: What if the speed of light was 5 km/h?,entertainment,627,287,dmitrybrant,2026-09-15 16:49:09.684782,0.4570063694267516,True
+49660676,Show HN: Godot and Rust based multiplexer (terminal panes and more),entertainment,97,50,1nv1n,2026-09-15 16:49:15.621405,0.5102040816326531,False
+49700223,NAZA: Israeli minister threatens to strip Israeli film-makers of citizenship,entertainment,19,0,jjgreen,2026-09-15 16:49:25.385359,0.0,False
+49701148,New Carlo Rovelli book challenges science understanding of reality and universe,entertainment,5,0,theanonymousone,2026-09-15 16:49:48.137637,0.0,False
+49647134,Music Theory for the 21st-Century Classroom,entertainment,304,150,aanet,2026-09-15 16:49:55.837300,0.4918032786885246,True
+49644603,Show HN: See Sounds on Your Webcam,entertainment,23,7,jimhi,2026-09-15 16:50:12.278412,0.2916666666666667,False
+49688748,Show HN: SF Title Alert,entertainment,5,0,arkadiyt,2026-09-15 16:50:32.395478,0.0,False
+49688052,Show HN: VibeWorld – a shared terminal world for developers and scientists,entertainment,7,3,sorbalda,2026-09-15 16:50:42.765594,0.375,False
