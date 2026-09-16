@@ -1,90 +1,134 @@
-# TrendPulse — Task 1: Data Collection
+# TrendPulse — What's Actually Trending Right Now
+
+A 4-part Python data pipeline that collects trending Hacker News stories, cleans and analyzes the data, and generates visualizations using Pandas, NumPy, and Matplotlib.
 
 ## Project Overview
 
-**TrendPulse** is a 4-part data pipeline project designed to identify and analyze what is currently trending on Hacker News.
+**TrendPulse** is a data collection, processing, analysis, and visualization project built using the Hacker News public API.
 
-The project is completed step by step:
+The project is divided into four sequential tasks:
 
-| Task | Description |
+```text
+Task 1 → Task 2 → Task 3 → Task 4
+  │       │        │        │
+  ▼       ▼        ▼        ▼
+JSON    Clean     Analyze  Visualize
+        CSV       CSV      PNG
+```
+
+### Pipeline
+
+1. **Task 1 — Data Collection**
+   - Fetch the top 500 Hacker News story IDs.
+   - Fetch individual story details.
+   - Categorize stories using title keywords.
+   - Collect up to 25 stories per category.
+   - Save the raw data as JSON.
+
+2. **Task 2 — Data Processing**
+   - Load the Task 1 JSON using Pandas.
+   - Remove duplicates and missing required values.
+   - Convert numeric columns to integers.
+   - Remove stories with scores below 5.
+   - Clean whitespace from titles.
+   - Save the cleaned data as CSV.
+
+3. **Task 3 — Data Analysis**
+   - Load the cleaned CSV.
+   - Explore the data using Pandas.
+   - Calculate statistics using NumPy.
+   - Identify the category with the most stories and the most commented story.
+   - Add `engagement` and `is_popular` columns.
+   - Save the analyzed data as CSV.
+
+4. **Task 4 — Visualization**
+   - Load the analyzed CSV.
+   - Create three Matplotlib charts.
+   - Create a combined dashboard.
+   - Save all visualizations as PNG files.
+
+## Project Objectives
+
+- Work with a real-world public REST API.
+- Collect JSON data using Python.
+- Handle API request failures gracefully.
+- Perform data cleaning using Pandas.
+- Perform numerical analysis using NumPy.
+- Create meaningful derived columns.
+- Visualize trends using Matplotlib.
+- Build a complete end-to-end data pipeline.
+- Organize intermediate and final outputs clearly.
+
+## Technologies Used
+
+| Technology | Purpose |
 |---|---|
-| Task 1 | Fetch JSON data from Hacker News API |
-| Task 2 | Clean and prepare the data |
-| Task 3 | Analyze data using NumPy and Pandas |
-| Task 4 | Visualize the trends |
+| Python | Main programming language |
+| Requests | API calls |
+| Pandas | Data loading, cleaning, processing, and analysis |
+| NumPy | Numerical statistics |
+| Matplotlib | Data visualization |
+| JSON | Raw data storage |
+| CSV | Cleaned and analyzed data storage |
+| Git | Version control |
+| GitHub | Source code repository |
 
-This repository contains **Task 1 — Fetch Data from API**.
+## Project Structure
 
----
+```text
+trendpulse-sivakumar/
+│
+├── task1_data_collection.py
+├── task2_data_processing.py
+├── task3_analysis.py
+├── task4_visualization.py
+├── README.md
+│
+├── data/
+│   ├── trends_YYYYMMDD.json
+│   ├── trends_clean.csv
+│   └── trends_analysed.csv
+│
+└── outputs/
+    ├── chart1_top_stories.png
+    ├── chart2_categories.png
+    ├── chart3_scatter.png
+    └── dashboard.png
+```
 
-## Task 1 Objective
+# Task 1 — Fetch Data from API
 
-The objective of Task 1 is to:
+**File:** `task1_data_collection.py`
 
-- Fetch the top 500 story IDs from Hacker News.
-- Fetch the details of each story using the Hacker News API.
-- Categorize stories into 5 categories based on keywords in their titles.
-- Collect up to 25 stories per category.
-- Extract the required fields.
-- Save the collected data as a JSON file inside the `data/` folder.
+Task 1 collects trending stories from Hacker News using its free public API. No API key, login, or registration is required.
 
-### Categories
+### API Endpoints
 
-The following five categories are used:
-
-1. Technology
-2. World News
-3. Sports
-4. Science
-5. Entertainment
-
----
-
-## Hacker News API
-
-Hacker News provides a free and open API. No API key, login, or registration is required.
-
-### Top Stories API
+Top stories:
 
 ```text
 https://hacker-news.firebaseio.com/v0/topstories.json
 ```
 
-This endpoint returns a list of Hacker News story IDs.
-
-The first **500 story IDs** are used for this task.
-
-### Story Details API
-
-For each story ID, the following endpoint is used:
+Story details:
 
 ```text
 https://hacker-news.firebaseio.com/v0/item/{id}.json
 ```
 
-Example:
-
-```text
-https://hacker-news.firebaseio.com/v0/item/8863.json
-```
+The script uses the first **500 story IDs**.
 
 ### Request Header
 
-The script sends the following User-Agent header:
-
 ```python
-headers = {
+HEADERS = {
     "User-Agent": "TrendPulse/1.0"
 }
 ```
 
----
+### Categories and Keywords
 
-## Category Keywords
-
-Each story is assigned to a category by checking whether its title contains one of the specified keywords.
-
-Matching is **case-insensitive**.
+Matching is case-insensitive.
 
 | Category | Keywords |
 |---|---|
@@ -94,326 +138,51 @@ Matching is **case-insensitive**.
 | science | research, study, space, physics, biology, discovery, NASA, genome |
 | entertainment | movie, film, music, Netflix, game, book, show, award, streaming |
 
-> Note: The keyword `game` appears in both **sports** and **entertainment**. The script checks categories in the defined order, so a title matching `game` will be assigned to the first matching category.
+> **Note:** `game` appears in both sports and entertainment. The category matching function checks categories in dictionary order and assigns the first matching category.
 
----
+### Data Fields
 
-## Data Fields
-
-Each collected story contains the following 7 fields:
-
-| Field | Hacker News Source | Description |
+| Field | Source / Method | Description |
 |---|---|---|
-| `post_id` | `id` | Unique Hacker News story ID |
-| `title` | `title` | Story title |
-| `category` | Custom | Category assigned using title keywords |
-| `score` | `score` | Number of upvotes |
-| `num_comments` | `descendants` | Number of comments |
-| `author` | `by` | Hacker News username |
-| `collected_at` | Custom | Date and time when the story was collected |
+| `post_id` | Hacker News `id` | Unique story ID |
+| `title` | Hacker News `title` | Story title |
+| `category` | Keyword classification | Assigned category |
+| `score` | Hacker News `score` | Number of upvotes |
+| `num_comments` | Hacker News `descendants` | Number of comments |
+| `author` | Hacker News `by` | Story author |
+| `collected_at` | Generated by script | Date and time of collection |
 
-Example record:
+### Collection Limit
 
-```json
-{
-    "post_id": 12345678,
-    "title": "Example technology story",
-    "category": "technology",
-    "score": 250,
-    "num_comments": 75,
-    "author": "example_user",
-    "collected_at": "2026-09-15T12:30:00"
-}
-```
-
----
-
-## Project Structure
-
-```text
-trendpulse-yourname/
-│
-├── task1_data_collection.py
-├── data/
-│   └── trends_YYYYMMDD.json
-│
-└── README.md
-```
-
-### Files
-
-**`task1_data_collection.py`**
-
-Contains the Python program used to fetch, categorize, and save Hacker News stories.
-
-**`data/trends_YYYYMMDD.json`**
-
-Contains the collected Hacker News stories in JSON format.
-
-**`README.md`**
-
-Contains project documentation and instructions.
-
----
-
-## Technologies Used
-
-- Python 3
-- Requests
-- JSON
-- datetime
-- os
-- time
-- Hacker News API
-
----
-
-## Python Libraries
-
-The main external library used is:
-
-```text
-requests
-```
-
-The following modules are from Python's standard library:
-
-```python
-time
-json
-os
-datetime
-```
-
----
-
-## Installation
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/<username>/trendpulse-<name>.git
-```
-
-Move into the project directory:
-
-```bash
-cd trendpulse-<name>
-```
-
-### 2. Install Requests
-
-```bash
-pip install requests
-```
-
-If you are using a specific Python installation:
-
-```bash
-python -m pip install requests
-```
-
----
-
-## How to Run
-
-Run the Python script from the project root:
-
-```bash
-python task1_data_collection.py
-```
-
-On some Windows systems, you may need:
-
-```bash
-py task1_data_collection.py
-```
-
----
-
-## How the Script Works
-
-### Step 1 — Fetch Top Story IDs
-
-The script calls:
-
-```text
-https://hacker-news.firebaseio.com/v0/topstories.json
-```
-
-and retrieves the first 500 story IDs.
-
-### Step 2 — Fetch Story Details
-
-For each story ID, the script calls:
-
-```text
-https://hacker-news.firebaseio.com/v0/item/{id}.json
-```
-
-The required story information is extracted from the API response.
-
-### Step 3 — Categorize Stories
-
-The title is converted to lowercase and compared against the category keywords.
-
-For example:
-
-```text
-"New AI software released for developers"
-```
-
-contains `AI` and `software`, so it can be classified as:
-
-```text
-technology
-```
-
-### Step 4 — Limit Stories Per Category
-
-The script collects a maximum of:
+The script collects up to:
 
 ```text
 25 stories per category
 ```
 
-Therefore, the theoretical maximum is:
+With five categories, the maximum is:
 
 ```text
-5 categories × 25 stories = 125 stories
+5 × 25 = 125 stories
 ```
 
-### Step 5 — Handle Failed Requests
+The actual number can vary because Hacker News content changes over time and not every title matches the required keywords.
 
-If an API request fails, the script prints an error message and continues processing the next story.
+### Error Handling
 
-This prevents a single failed request from stopping the entire program.
+If an API request fails, the script prints an error message and continues with the next story rather than terminating the program.
 
-### Step 6 — Wait Between Categories
+### Delay Requirement
 
-The assignment requires a 2-second delay between category loops.
-
-The script uses:
+The assignment requires a 2-second wait between category loops:
 
 ```python
 time.sleep(2)
 ```
 
-between categories.
+The delay is not applied between individual story requests.
 
-The delay is **not** applied after every individual API request.
-
-### Step 7 — Create the Data Folder
-
-If the `data/` folder does not already exist, the script creates it automatically:
-
-```python
-os.makedirs("data", exist_ok=True)
-```
-
-### Step 8 — Save JSON
-
-The output filename is generated using the current date:
-
-```text
-data/trends_YYYYMMDD.json
-```
-
-For example:
-
-```text
-data/trends_20260915.json
-```
-
----
-
-## Expected Output
-
-After successful execution, the console will display information similar to:
-
-```text
-Starting TrendPulse data collection...
-Fetched 500 top story IDs.
-
-Collecting category: technology
-  Collected 1/25: ...
-  Collected 2/25: ...
-  ...
-
-Waiting 2 seconds before next category...
-
-Collecting category: worldnews
-  Collected 1/25: ...
-  ...
-
-==================================================
-TrendPulse Data Collection Completed
-==================================================
-Collected 120 stories.
-Saved to data/trends_20260915.json
-
-Category Summary:
-technology: 25
-worldnews: 20
-sports: 25
-science: 25
-entertainment: 25
-```
-
-The exact number of stories may vary because the Hacker News top stories change over time and not every story title will match the required keywords.
-
----
-
-## Error Handling
-
-The script uses exception handling for API failures.
-
-Example:
-
-```python
-try:
-    response = requests.get(
-        url,
-        headers=headers,
-        timeout=10
-    )
-    response.raise_for_status()
-
-except requests.RequestException as error:
-    print(f"Failed to fetch story: {error}")
-```
-
-If an individual story cannot be retrieved, the script skips that story and continues.
-
----
-
-## Assignment Requirements Checklist
-
-| Requirement | Status |
-|---|---|
-| Fetch Hacker News top stories | ✅ |
-| Fetch first 500 story IDs | ✅ |
-| Fetch story details | ✅ |
-| Use `requests` library | ✅ |
-| Use `TrendPulse/1.0` User-Agent | ✅ |
-| Handle failed requests | ✅ |
-| Categorize stories using keywords | ✅ |
-| Case-insensitive keyword matching | ✅ |
-| 5 required categories | ✅ |
-| Maximum 25 stories per category | ✅ |
-| Extract all 7 required fields | ✅ |
-| Add collection date/time | ✅ |
-| Create `data/` folder | ✅ |
-| Save JSON output | ✅ |
-| Wait 2 seconds between categories | ✅ |
-| Print total number collected | ✅ |
-| Code comments included | ✅ |
-
----
-
-## Output File
-
-The generated file will be stored at:
+### Output
 
 ```text
 data/trends_YYYYMMDD.json
@@ -425,75 +194,647 @@ Example:
 data/trends_20260915.json
 ```
 
-The JSON file contains an array of story objects.
+# Task 2 — Clean the Data & Save as CSV
 
----
+**File:** `task2_data_processing.py`
 
-## GitHub Submission
+### Input
 
-After testing the script, commit and push the project to a **public GitHub repository**.
+```text
+data/trends_YYYYMMDD.json
+```
 
-### Initialize Git
+The script automatically finds the most recently modified `trends_*.json` file in the `data/` folder.
+
+### Cleaning Operations
+
+1. Load the JSON into a Pandas DataFrame.
+2. Print the number of loaded rows.
+3. Remove duplicate rows using `post_id`.
+4. Drop rows where `post_id`, `title`, or `score` is missing.
+5. Strip extra whitespace from `title`.
+6. Convert `score` and `num_comments` to integers.
+7. Remove stories where `score < 5`.
+8. Print the number of remaining rows.
+9. Print the number of stories per category.
+
+### Output
+
+```text
+data/trends_clean.csv
+```
+
+Example:
+
+```text
+Loaded 122 stories from data/trends_YYYYMMDD.json
+
+After removing duplicates: 120
+After removing nulls: 118
+After removing low scores: 114
+
+Saved 114 rows to data/trends_clean.csv
+
+Stories per category:
+  technology      22
+  worldnews       24
+  sports          21
+  science         24
+  entertainment   23
+```
+
+The numbers above are examples; actual results depend on the data collected from Hacker News.
+
+# Task 3 — Analysis with Pandas & NumPy
+
+**File:** `task3_analysis.py`
+
+### Input
+
+```text
+data/trends_clean.csv
+```
+
+### Data Exploration
+
+The script prints:
+
+- First five rows
+- DataFrame shape
+- Average score
+- Average number of comments
+
+### NumPy Statistics
+
+NumPy is used for:
+
+- Mean score
+- Median score
+- Standard deviation
+- Maximum score
+- Minimum score
+
+Example:
+
+```python
+np.mean(scores)
+np.median(scores)
+np.std(scores)
+np.max(scores)
+np.min(scores)
+```
+
+### Category Analysis
+
+Pandas `value_counts()` identifies the category containing the most stories.
+
+```python
+category_counts = df["category"].value_counts()
+```
+
+### Most Commented Story
+
+The story with the highest `num_comments` value is identified and its title and comment count are printed.
+
+## New Column — `engagement`
+
+Formula:
+
+```text
+engagement = num_comments / (score + 1)
+```
+
+Implementation:
+
+```python
+df["engagement"] = (
+    df["num_comments"] /
+    (df["score"] + 1)
+)
+```
+
+The `+1` prevents division by zero.
+
+## New Column — `is_popular`
+
+The average score is calculated:
+
+```python
+average_score = df["score"].mean()
+```
+
+A story is marked popular when:
+
+```python
+df["is_popular"] = (
+    df["score"] > average_score
+)
+```
+
+The column contains Boolean values:
+
+```text
+True
+False
+```
+
+### Output
+
+```text
+data/trends_analysed.csv
+```
+
+The output contains the cleaned data plus:
+
+```text
+engagement
+is_popular
+```
+
+# Task 4 — Visualizations
+
+**File:** `task4_visualization.py`
+
+### Input
+
+```text
+data/trends_analysed.csv
+```
+
+The script creates an `outputs/` folder if it does not already exist.
+
+## Chart 1 — Top 10 Stories by Score
+
+**Output:**
+
+```text
+outputs/chart1_top_stories.png
+```
+
+A horizontal bar chart displays the top 10 stories by score.
+
+Titles longer than 50 characters are shortened for readability.
+
+The chart includes:
+
+- Chart title
+- Story title on the y-axis
+- Score on the x-axis
+
+## Chart 2 — Stories per Category
+
+**Output:**
+
+```text
+outputs/chart2_categories.png
+```
+
+A bar chart displays the number of stories in each category.
+
+Each category bar uses a different color.
+
+The chart includes:
+
+- Chart title
+- Category on the x-axis
+- Number of stories on the y-axis
+
+## Chart 3 — Score vs Comments
+
+**Output:**
+
+```text
+outputs/chart3_scatter.png
+```
+
+A scatter plot displays:
+
+```text
+X-axis → score
+Y-axis → num_comments
+```
+
+The `is_popular` column is used to distinguish popular and non-popular stories.
+
+The chart includes:
+
+- Chart title
+- X-axis label
+- Y-axis label
+- Legend
+
+## Bonus — TrendPulse Dashboard
+
+**Output:**
+
+```text
+outputs/dashboard.png
+```
+
+The three charts are combined into a 2 × 2 dashboard layout, with a summary panel in the fourth position.
+
+Overall dashboard title:
+
+```text
+TrendPulse Dashboard
+```
+
+# Complete Data Flow
+
+```text
+                 Hacker News API
+                        │
+                        ▼
+              ┌──────────────────┐
+              │      Task 1      │
+              │ Data Collection  │
+              └────────┬─────────┘
+                       │
+                       ▼
+              trends_YYYYMMDD.json
+                       │
+                       ▼
+              ┌──────────────────┐
+              │      Task 2      │
+              │ Data Processing  │
+              └────────┬─────────┘
+                       │
+                       ▼
+                trends_clean.csv
+                       │
+                       ▼
+              ┌──────────────────┐
+              │      Task 3      │
+              │ Pandas + NumPy   │
+              └────────┬─────────┘
+                       │
+                       ▼
+               trends_analysed.csv
+                       │
+                       ▼
+              ┌──────────────────┐
+              │      Task 4      │
+              │  Visualization   │
+              └────────┬─────────┘
+                       │
+                       ▼
+             ┌────────────────────┐
+             │   PNG Visuals      │
+             │                    │
+             │ • Top Stories      │
+             │ • Categories       │
+             │ • Score/Comments   │
+             │ • Dashboard        │
+             └────────────────────┘
+```
+
+# Installation
+
+## Prerequisites
+
+Python 3 is required.
+
+Check the installed version:
+
+```bash
+python --version
+```
+
+On Windows:
+
+```bash
+py --version
+```
+
+## Install Required Packages
+
+```bash
+pip install requests pandas numpy matplotlib
+```
+
+Alternatively:
+
+```bash
+python -m pip install requests pandas numpy matplotlib
+```
+
+# How to Run the Complete Project
+
+Run the tasks in order because each task uses the output from the previous task.
+
+## Step 1 — Data Collection
+
+```bash
+python task1_data_collection.py
+```
+
+Creates:
+
+```text
+data/trends_YYYYMMDD.json
+```
+
+## Step 2 — Data Processing
+
+```bash
+python task2_data_processing.py
+```
+
+Creates:
+
+```text
+data/trends_clean.csv
+```
+
+## Step 3 — Data Analysis
+
+```bash
+python task3_analysis.py
+```
+
+Creates:
+
+```text
+data/trends_analysed.csv
+```
+
+## Step 4 — Visualization
+
+```bash
+python task4_visualization.py
+```
+
+Creates:
+
+```text
+outputs/chart1_top_stories.png
+outputs/chart2_categories.png
+outputs/chart3_scatter.png
+outputs/dashboard.png
+```
+
+# Expected Final Outputs
+
+```text
+data/
+├── trends_YYYYMMDD.json
+├── trends_clean.csv
+└── trends_analysed.csv
+
+outputs/
+├── chart1_top_stories.png
+├── chart2_categories.png
+├── chart3_scatter.png
+└── dashboard.png
+```
+
+# Assignment Requirements Checklist
+
+## Task 1 — Data Collection
+
+- [x] Fetch Hacker News top story IDs
+- [x] Fetch first 500 story IDs
+- [x] Fetch individual story details
+- [x] Use Requests
+- [x] Use `TrendPulse/1.0` User-Agent
+- [x] Handle failed requests without crashing
+- [x] Categorize stories using required keywords
+- [x] Case-insensitive keyword matching
+- [x] Collect up to 25 stories per category
+- [x] Extract all 7 required fields
+- [x] Add collection date and time
+- [x] Create `data/` folder
+- [x] Save JSON output
+- [x] Print total number collected
+
+## Task 2 — Data Processing
+
+- [x] Load JSON with Pandas
+- [x] Print loaded row count
+- [x] Remove duplicate `post_id` values
+- [x] Remove missing `post_id`, `title`, and `score`
+- [x] Convert `score` to integer
+- [x] Convert `num_comments` to integer
+- [x] Remove stories with score below 5
+- [x] Strip whitespace from titles
+- [x] Save `trends_clean.csv`
+- [x] Print stories-per-category summary
+
+## Task 3 — Analysis
+
+- [x] Load `trends_clean.csv`
+- [x] Print first five rows
+- [x] Print DataFrame shape
+- [x] Calculate average score
+- [x] Calculate average comments
+- [x] Use NumPy mean
+- [x] Use NumPy median
+- [x] Use NumPy standard deviation
+- [x] Find maximum score
+- [x] Find minimum score
+- [x] Find category with the most stories
+- [x] Find the most commented story
+- [x] Add `engagement`
+- [x] Add `is_popular`
+- [x] Save `trends_analysed.csv`
+
+## Task 4 — Visualization
+
+- [x] Load `trends_analysed.csv`
+- [x] Create `outputs/` folder
+- [x] Create top 10 stories chart
+- [x] Shorten titles longer than 50 characters
+- [x] Create stories-per-category chart
+- [x] Use different colors for category bars
+- [x] Create score-vs-comments scatter plot
+- [x] Distinguish popular and non-popular stories
+- [x] Add chart titles
+- [x] Add axis labels
+- [x] Add scatter plot legend
+- [x] Save all charts as PNG
+- [x] Create combined dashboard
+- [x] Save `dashboard.png`
+
+# GitHub Submission
+
+The completed project should be pushed to a **public GitHub repository**.
+
+Example repository:
+
+```text
+https://github.com/<username>/trendpulse-<name>
+```
+
+## Git Commands
+
+Initialize Git if required:
 
 ```bash
 git init
 ```
 
-### Add files
+Add project files:
 
 ```bash
-git add task1_data_collection.py README.md data/
+git add .
 ```
 
-### Commit
+Commit:
 
 ```bash
-git commit -m "Complete TrendPulse Task 1 data collection"
+git commit -m "Complete TrendPulse Tasks 1 to 4"
 ```
 
-### Add GitHub repository
+Add the GitHub remote:
 
 ```bash
 git remote add origin https://github.com/<username>/trendpulse-<name>.git
 ```
 
-### Push
+Set the main branch:
 
 ```bash
 git branch -M main
+```
+
+Push:
+
+```bash
 git push -u origin main
 ```
 
-### Submission Link
+For later updates:
 
-Replace `<username>` and `<name>` with your GitHub details.
+```bash
+git add .
+git commit -m "Update TrendPulse project"
+git push
+```
+
+# Submission Links
+
+### Task 1
 
 ```text
 https://github.com/<username>/trendpulse-<name>/blob/main/task1_data_collection.py
 ```
 
----
+### Task 2
 
-## Future Tasks
+```text
+https://github.com/<username>/trendpulse-<name>/blob/main/task2_data_processing.py
+```
 
-TrendPulse will continue with the following tasks:
+### Task 3
 
-### Task 2 — Clean CSV
+```text
+https://github.com/<username>/trendpulse-<name>/blob/main/task3_analysis.py
+```
 
-The JSON data collected in Task 1 will be cleaned and converted into a CSV dataset.
+### Task 4
 
-### Task 3 — NumPy & Pandas
+```text
+https://github.com/<username>/trendpulse-<name>/blob/main/task4_visualization.py
+```
 
-The cleaned data will be analyzed using NumPy and Pandas to identify trends and statistics.
+# Troubleshooting
 
-### Task 4 — Visualization
+## `ModuleNotFoundError`
 
-The final data will be visualized using charts and graphs to understand the trending categories.
+For Pandas:
 
----
+```bash
+python -m pip install pandas
+```
 
-## Author
+For NumPy:
+
+```bash
+python -m pip install numpy
+```
+
+For Matplotlib:
+
+```bash
+python -m pip install matplotlib
+```
+
+For Requests:
+
+```bash
+python -m pip install requests
+```
+
+## Input File Not Found
+
+If Task 2 cannot find the JSON file, run Task 1 first:
+
+```bash
+python task1_data_collection.py
+```
+
+If Task 3 cannot find `trends_clean.csv`, run Task 2:
+
+```bash
+python task2_data_processing.py
+```
+
+If Task 4 cannot find `trends_analysed.csv`, run Task 3:
+
+```bash
+python task3_analysis.py
+```
+
+# Important Notes
+
+- Hacker News data is live and changes over time.
+- Story scores and comment counts can differ between runs.
+- The exact number of categorized stories can vary.
+- Task 1 can collect a maximum of 125 stories.
+- Task 2 may reduce the number of records during cleaning.
+- Task 3 adds the `engagement` and `is_popular` columns.
+- Task 4 uses the Task 3 output to create the visualizations.
+- The tasks should normally be executed in order.
+- Review generated JSON, CSV, and PNG files before submitting the repository.
+
+# Learning Outcomes
+
+By completing TrendPulse, the project demonstrates practical experience with:
+
+- REST API data collection
+- HTTP requests
+- JSON data handling
+- Error handling
+- Data cleaning
+- Missing-value handling
+- Duplicate detection
+- Data type conversion
+- Pandas DataFrames
+- NumPy statistical analysis
+- Derived columns/features
+- Boolean classification
+- Matplotlib visualization
+- Dashboard creation
+- File and folder management
+- Git and GitHub workflow
+
+# Author
 
 **Siva Kumar D**
 
-TrendPulse — Task 1: Data Collection
+TrendPulse — Hacker News Data Collection, Processing, Analysis & Visualization
+
+# Project Completion
+
+```text
+┌──────────────────────────────────────────────┐
+│                  TRENDPULSE                  │
+│                                              │
+│  Task 1  →  Task 2  →  Task 3  →  Task 4     │
+│   API       Cleaning     Analysis   Charts   │
+│    ↓           ↓            ↓         ↓      │
+│   JSON        CSV          CSV       PNG     │
+│                                              │
+│              PROJECT COMPLETE                │
+└──────────────────────────────────────────────┘
+```
